@@ -60,6 +60,14 @@ gtl push
 gtl acp
 ```
 
+### Version
+
+```bash
+gtl -v
+gtl version
+gtl --version
+```
+
 ### Help
 
 ```bash

@@ -15,7 +15,7 @@ pub(crate) use std::{
 };
 
 pub(crate) static PACKAGE_NAME: &str = "gtl";
-pub(crate) static PACKAGE_VERSION: &str = "0.1.4";
+pub(crate) static PACKAGE_VERSION: &str = "0.1.6";
 
 pub(crate) fn get_package_name() -> &'static str {
     PACKAGE_NAME
@@ -41,7 +41,10 @@ fn main() {
         add_commit_push_to_all_remotes(&config);
     } else if args_first == OsString::from("help") {
         git::help();
-    } else if args_first == OsString::from("version") || args_first == OsString::from("-v") {
+    } else if args_first == OsString::from("-v")
+        || args_first == OsString::from("version")
+        || args_first == OsString::from("--version")
+    {
         git::version();
     } else {
         git::other(&args);
