@@ -11,7 +11,7 @@ pub(crate) use std::{
     fs,
     io::{self, Write},
     path::{Path, PathBuf},
-    process::{exit, Command, ExitStatus},
+    process::{Command, ExitStatus, exit},
 };
 
 pub(crate) static PACKAGE_NAME: &str = "gtl";
