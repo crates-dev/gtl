@@ -4,9 +4,13 @@
 
 [English](readme.md) | [简体中文](readme.zh-cn.md)
 
+[![](https://img.shields.io/crates/v/gtl.svg)](https://crates.io/crates/gtl)
+[![](https://img.shields.io/crates/d/gtl.svg)](https://img.shields.io/crates/d/gtl.svg)
+[![](https://img.shields.io/crates/l/gtl.svg)](./license)
+
 </center>
 
-`gtl` 是一个基于 Git 的工具，旨在简化多远程仓库的管理。它扩展了 Git 的功能，提供了一键初始化和推送到多个远程仓库的功能，特别适合需要同时维护多个远程仓库的开发者。
+> `gtl` 是一个基于 Git 的工具，旨在简化多远程仓库的管理。它扩展了 Git 的功能，提供了一键初始化和推送到多个远程仓库的功能，特别适合需要同时维护多个远程仓库的开发者。
 
 ## 特性
 

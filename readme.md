@@ -4,9 +4,13 @@
 
 [English](readme.md) | [简体中文](readme.zh-cn.md)
 
+[![](https://img.shields.io/crates/v/gtl.svg)](https://crates.io/crates/gtl)
+[![](https://img.shields.io/crates/d/gtl.svg)](https://img.shields.io/crates/d/gtl.svg)
+[![](https://img.shields.io/crates/l/gtl.svg)](./license)
+
 </center>
 
-`gtl` is a Git-based tool designed to simplify the management of multiple remote repositories. It extends Git's functionality by providing one-click initialization and pushing to multiple remote repositories, making it especially useful for developers who need to maintain multiple remote repositories simultaneously.
+> `gtl` is a Git-based tool designed to simplify the management of multiple remote repositories. It extends Git's functionality by providing one-click initialization and pushing to multiple remote repositories, making it especially useful for developers who need to maintain multiple remote repositories simultaneously.
 
 ## Features
 
