@@ -1,7 +1,7 @@
 pub(crate) mod cmd;
 pub(crate) mod config;
 pub(crate) use crate::{cmd::git, config::r#type::*};
-pub(crate) use config::{constant::*, func::*};
+pub(crate) use config::{r#const::*, func::*};
 pub(crate) use serde::Deserialize;
 pub(crate) use serde::Serialize;
 pub(crate) use std::{
@@ -14,8 +14,8 @@ pub(crate) use std::{
     process::{Command, ExitStatus, exit},
 };
 
-pub(crate) static PACKAGE_NAME: &str = "gtl";
-pub(crate) static PACKAGE_VERSION: &str = "0.1.6";
+pub(crate) const PACKAGE_NAME: &str = "gtl";
+pub(crate) const PACKAGE_VERSION: &str = "0.1.6";
 
 pub(crate) fn get_package_name() -> &'static str {
     PACKAGE_NAME
