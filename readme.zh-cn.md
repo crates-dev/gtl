@@ -36,8 +36,8 @@ cargo install gtl
 ```json
 {
   "D:\\code\\gtl": [
-    { "name": "gitee", "url": "git@gitee.com:ltpp-universe/gtl.git" },
-    { "name": "origin", "url": "git@github.com:ltpp-universe/gtl.git" }
+    { "name": "gitee", "url": "git@gitee.com:eastspire/gtl.git" },
+    { "name": "origin", "url": "git@github.com:eastspire/gtl.git" }
   ]
 }
 ```
@@ -95,4 +95,4 @@ gtl help
 
 ## 联系方式
 
-如有任何疑问，请联系作者：[ltpp-universe <root@ltpp.vip>](mailto:root@ltpp.vip)。
+如有任何疑问，请联系作者：[root@ltpp.vip](mailto:root@ltpp.vip)。

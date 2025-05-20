@@ -1,8 +1,8 @@
 [package]
 name = "gtl"
-version = "0.4.1"
+version = "0.4.2"
 edition = "2024"
-authors = ["eastspire <root@ltpp.vip>"] 
+authors = ["root@ltpp.vip"] 
 license = "MIT"
 description = """gtl is a Git-based tool designed to simplify the management of multiple remote repositories. It extends Git's functionality by providing one-click initialization and pushing to multiple remote repositories, making it especially useful for developers who need to maintain multiple remote repositories simultaneously."""
 keywords = ["git", "helper", "remote", "tool", "repositories"]
