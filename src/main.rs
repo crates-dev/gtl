@@ -80,7 +80,10 @@ fn add_commit_push_to_all_remotes(config: &Config) {
     io::stdout().flush().unwrap();
     let mut commit_msg: String = String::new();
     io::stdin().read_line(&mut commit_msg).unwrap();
-    let commit_msg: &str = commit_msg.trim();
+    let mut commit_msg: &str = commit_msg.trim();
+    if commit_msg.is_empty() {
+        commit_msg = "update: code";
+    }
     git::add_all();
     git::commit(commit_msg);
     if let Some(remotes) = config.get(current_path) {
