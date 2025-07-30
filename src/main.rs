@@ -1,3 +1,11 @@
+//! gtl
+//!
+//! gtl is a Git-based tool designed to simplify the management
+//! of multiple remote repositories. It extends Git's functionality
+//! by providing one-click initialization and pushing to multiple
+//! remote repositories, making it especially useful for developers
+//! who need to maintain multiple remote repositories simultaneously.
+
 pub(crate) mod cmd;
 pub(crate) mod config;
 pub(crate) use crate::{cmd::git, config::r#type::*};
@@ -14,17 +22,34 @@ pub(crate) use std::{
     process::{Command, ExitStatus, exit},
 };
 
+/// Package name constant.
 pub(crate) const PACKAGE_NAME: &str = "gtl";
+/// Package version constant.
 pub(crate) const PACKAGE_VERSION: &str = "0.1.6";
 
+/// Gets the package name.
+///
+/// # Returns
+///
+/// - `&'static str` - The package name.
 pub(crate) fn get_package_name() -> &'static str {
     PACKAGE_NAME
 }
 
+/// Gets the package version.
+///
+/// # Returns
+///
+/// - `&'static str` - The package version.
 pub(crate) fn get_package_version() -> &'static str {
     PACKAGE_VERSION
 }
 
+/// Main entry point of the application.
+///
+/// # Arguments
+///
+/// - `Vec<OsString>` - Command line arguments.
 fn main() {
     let args: Vec<_> = env::args_os().skip(1).collect();
     if args.is_empty() {
@@ -51,6 +76,11 @@ fn main() {
     }
 }
 
+/// Initializes a git repository with configuration.
+///
+/// # Arguments
+///
+/// - `&Config` - The configuration to use.
 fn init_repository(config: &Config) {
     git::init();
     git::config_global_add_safe_directory("./");
@@ -64,6 +94,11 @@ fn init_repository(config: &Config) {
     }
 }
 
+/// Pushes to all configured git remotes.
+///
+/// # Arguments
+///
+/// - `&Config` - The configuration containing remotes.
 fn push_to_all_remotes(config: &Config) {
     let current_dir: PathBuf = std::env::current_dir().unwrap();
     let current_path: &str = current_dir.to_str().unwrap();
@@ -74,6 +109,11 @@ fn push_to_all_remotes(config: &Config) {
     }
 }
 
+/// Adds, commits and pushes to all configured git remotes.
+///
+/// # Arguments
+///
+/// - `&Config` - The configuration containing remotes.
 fn add_commit_push_to_all_remotes(config: &Config) {
     let current_dir: PathBuf = std::env::current_dir().unwrap();
     let current_path: &str = current_dir.to_str().unwrap();

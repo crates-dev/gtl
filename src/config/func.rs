@@ -1,5 +1,14 @@
 use crate::*;
 
+/// Reads configuration from a file, creates default if not exists.
+///
+/// # Arguments
+///
+/// - `P: AsRef<Path>` - The path to the configuration file.
+///
+/// # Returns
+///
+/// - `Config` - The parsed configuration.
 pub fn read_config<P: AsRef<Path>>(path: P) -> Config {
     let path_ref: &Path = path.as_ref();
     if !path_ref.exists() {
