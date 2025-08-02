@@ -2,7 +2,7 @@
 
 ## gtl
 
-[English](readme.md) | [简体中文](readme.zh-cn.md)
+[English](README.md) | [简体中文](README.ZH-CN.md)
 
 [![](https://img.shields.io/crates/v/gtl.svg)](https://crates.io/crates/gtl)
 [![](https://img.shields.io/crates/d/gtl.svg)](https://img.shields.io/crates/d/gtl.svg)
