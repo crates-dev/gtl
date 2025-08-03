@@ -9,6 +9,7 @@
 pub(crate) mod cmd;
 pub(crate) mod config;
 pub(crate) use crate::{cmd::git, config::r#type::*};
+pub(crate) use chrono::Local;
 pub(crate) use config::{r#const::*, func::*};
 pub(crate) use serde::Deserialize;
 pub(crate) use serde::Serialize;
@@ -74,6 +75,11 @@ fn main() {
         push_to_all_remotes(&config);
     } else if args_first == OsString::from("acp") {
         add_commit_push_to_all_remotes(&config);
+    } else if args_first == OsString::from("pgcp") {
+        publish_package();
+        add_commit_push_to_all_remotes(&config);
+    } else if args_first == OsString::from("pacp") {
+        add_commit_auto_push(&config);
     } else if args_first == OsString::from("help") {
         git::help();
     } else if args_first == OsString::from("-v")
@@ -84,6 +90,43 @@ fn main() {
     } else {
         git::other(&args);
     }
+}
+
+/// Publishes the crate to crates.io with retries.
+fn publish_package() {
+    const MAX_RETRIES: u32 = 3;
+    const RETRY_DELAY_SECS: u64 = 2;
+
+    for attempt in 1..=MAX_RETRIES {
+        let status = Command::new("cargo")
+            .args(["publish", "--allow-dirty"])
+            .status();
+
+        match status {
+            Ok(exit_status) if exit_status.success() => {
+                println!("Successfully published package.");
+                return;
+            }
+            Ok(exit_status) => {
+                eprintln!(
+                    "Attempt {} failed with status: {}. Retrying in {} seconds...",
+                    attempt, exit_status, RETRY_DELAY_SECS
+                );
+            }
+            Err(e) => {
+                eprintln!(
+                    "Attempt {} failed with error: {}. Retrying in {} seconds...",
+                    attempt, e, RETRY_DELAY_SECS
+                );
+            }
+        }
+
+        if attempt < MAX_RETRIES {
+            std::thread::sleep(std::time::Duration::from_secs(RETRY_DELAY_SECS));
+        }
+    }
+
+    panic!("Failed to publish package after {} attempts.", MAX_RETRIES);
 }
 
 /// Initializes a git repository with configuration.
@@ -119,6 +162,40 @@ fn push_to_all_remotes(config: &Config) {
     }
 }
 
+/// Generates a commit message automatically based on Cargo.toml version or timestamp.
+///
+/// # Returns
+///
+/// - `String` - The generated commit message.
+fn generate_auto_commit_message() -> String {
+    match fs::read_to_string("Cargo.toml") {
+        Ok(content) => {
+            if let Ok(cargo_toml) = toml::from_str::<CargoToml>(&content) {
+                format!("feat: v{}", cargo_toml.package.version)
+            } else {
+                let now = Local::now();
+                format!("feat: {}", now.format("%Y-%m-%d %H:%M:%S"))
+            }
+        }
+        Err(_) => {
+            let now = Local::now();
+            format!("feat: {}", now.format("%Y-%m-%d %H:%M:%S"))
+        }
+    }
+}
+
+/// Adds, commits with an auto-generated message, and pushes to all remotes.
+///
+/// # Arguments
+///
+/// - `&Config` - The configuration containing remotes.
+fn add_commit_auto_push(config: &Config) {
+    git::add_all();
+    let commit_msg = generate_auto_commit_message();
+    git::commit(&commit_msg);
+    push_to_all_remotes(config);
+}
+
 /// Adds, commits and pushes to all configured git remotes.
 ///
 /// # Arguments
@@ -131,16 +208,11 @@ fn add_commit_push_to_all_remotes(config: &Config) {
     let mut commit_msg_input: String = String::new();
     io::stdin().read_line(&mut commit_msg_input).unwrap();
     let commit_msg_trimmed: &str = commit_msg_input.trim();
-    let commit_msg: String;
-    if commit_msg_trimmed.is_empty() {
-        let cargo_toml_content: String =
-            fs::read_to_string("Cargo.toml").expect("Failed to read Cargo.toml");
-        let cargo_toml: CargoToml =
-            toml::from_str(&cargo_toml_content).expect("Failed to parse Cargo.toml");
-        commit_msg = format!("feat: v{}", cargo_toml.package.version);
+    let commit_msg = if commit_msg_trimmed.is_empty() {
+        generate_auto_commit_message()
     } else {
-        commit_msg = commit_msg_trimmed.to_string();
-    }
+        commit_msg_trimmed.to_string()
+    };
     git::add_all();
     git::commit(&commit_msg);
     if let Some(remotes) = config.get(current_path) {
