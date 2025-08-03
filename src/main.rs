@@ -75,10 +75,8 @@ fn main() {
         push_to_all_remotes(&config);
     } else if args_first == OsString::from("acp") {
         add_commit_push_to_all_remotes(&config);
-    } else if args_first == OsString::from("pgcp") {
-        publish_package();
-        add_commit_push_to_all_remotes(&config);
     } else if args_first == OsString::from("pacp") {
+        publish_package();
         add_commit_auto_push(&config);
     } else if args_first == OsString::from("help") {
         git::help();
@@ -94,7 +92,7 @@ fn main() {
 
 /// Publishes the crate to crates.io with retries.
 fn publish_package() {
-    const MAX_RETRIES: u32 = 3;
+    const MAX_RETRIES: u32 = 6;
     const RETRY_DELAY_SECS: u64 = 2;
 
     for attempt in 1..=MAX_RETRIES {
