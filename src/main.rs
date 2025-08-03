@@ -27,6 +27,16 @@ pub(crate) const PACKAGE_NAME: &str = "gtl";
 /// Package version constant.
 pub(crate) const PACKAGE_VERSION: &str = "0.1.6";
 
+#[derive(Deserialize)]
+struct CargoToml {
+    package: Package,
+}
+
+#[derive(Deserialize)]
+struct Package {
+    version: String,
+}
+
 /// Gets the package name.
 ///
 /// # Returns
@@ -118,14 +128,21 @@ fn add_commit_push_to_all_remotes(config: &Config) {
     let current_dir: PathBuf = std::env::current_dir().unwrap();
     let current_path: &str = current_dir.to_str().unwrap();
     io::stdout().flush().unwrap();
-    let mut commit_msg: String = String::new();
-    io::stdin().read_line(&mut commit_msg).unwrap();
-    let mut commit_msg: &str = commit_msg.trim();
-    if commit_msg.is_empty() {
-        commit_msg = "update: code";
+    let mut commit_msg_input: String = String::new();
+    io::stdin().read_line(&mut commit_msg_input).unwrap();
+    let commit_msg_trimmed: &str = commit_msg_input.trim();
+    let commit_msg: String;
+    if commit_msg_trimmed.is_empty() {
+        let cargo_toml_content: String =
+            fs::read_to_string("Cargo.toml").expect("Failed to read Cargo.toml");
+        let cargo_toml: CargoToml =
+            toml::from_str(&cargo_toml_content).expect("Failed to parse Cargo.toml");
+        commit_msg = format!("feat: v{}", cargo_toml.package.version);
+    } else {
+        commit_msg = commit_msg_trimmed.to_string();
     }
     git::add_all();
-    git::commit(commit_msg);
+    git::commit(&commit_msg);
     if let Some(remotes) = config.get(current_path) {
         for remote in remotes {
             git::push(&remote.name);
