@@ -64,6 +64,12 @@ gtl push
 gtl acp
 ```
 
+### 发布到 Crates.io & Git 添加 & 提交 & 推送
+
+```bash
+gtl pacp
+```
+
 ### 版本
 
 ```bash

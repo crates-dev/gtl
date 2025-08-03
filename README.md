@@ -64,6 +64,12 @@ gtl push
 gtl acp
 ```
 
+### Publish to Crates.io & Git add & commit & push
+
+```bash
+gtl pacp
+```
+
 ### Version
 
 ```bash
