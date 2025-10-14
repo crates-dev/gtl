@@ -86,10 +86,23 @@ gtl help
 
 ## 赞赏
 
-**如果你觉得 `hyperlane` 对你有所帮助，欢迎捐赠。**
+**如果你觉得 `gtl` 对你有所帮助，欢迎捐赠。**
 
-<img src="https://docs.ltpp.vip/img/wechat-pay.png" width="200">  
-<img src="https://docs.ltpp.vip/img/alipay-pay.jpg" width="200">
+### 微信支付
+
+<img src="https://docs.ltpp.vip/img/wechatpay.png" width="200">
+
+### 支付宝支付
+
+<img src="https://docs.ltpp.vip/img/alipay.png" width="200">
+
+### 虚拟货币支付
+
+| 虚拟货币 | 虚拟货币地址                               |
+| -------- | ------------------------------------------ |
+| BTC      | 3QndxCJTf3mEniTgyRRQ1jcNTJajm9qSCy         |
+| ETH      | 0x8EB3794f67897ED397584d3a1248a79e0B8e97A6 |
+| BSC      | 0x8EB3794f67897ED397584d3a1248a79e0B8e97A6 |
 
 ## 许可证
 
