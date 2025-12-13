@@ -1,6 +1,6 @@
 [package]
 name = "gtl"
-version = "0.5.7"
+version = "0.5.8"
 readme = "README.md"
 edition = "2024"
 authors = ["root@ltpp.vip"]
@@ -9,12 +9,7 @@ description = """gtl is a Git-based tool designed to simplify the management of 
 keywords = ["git", "helper", "remote", "tool", "repositories"]
 repository = "https://github.com/crates-dev/gtl.git"
 categories = ["data-structures", "development-tools"]
-exclude = [
-    "target",
-    "Cargo.lock",
-    "sh",
-    ".github"
-]
+exclude = ["target", "Cargo.lock", "sh", ".github"]
 
 [dependencies]
 serde = { version = "1.0.228", features = ["derive"] }
