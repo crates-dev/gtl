@@ -25,6 +25,7 @@ pub(crate) use std::{
 
 /// Package name constant.
 pub(crate) const PACKAGE_NAME: &str = "gtl";
+
 /// Package version constant.
 pub(crate) const PACKAGE_VERSION: &str = "0.1.6";
 
@@ -69,20 +70,20 @@ fn main() {
     }
     let config: Config = read_config(CONFIG_PATH);
     let args_first: OsString = args[0].clone();
-    if args_first == OsString::from("init") {
+    if args_first == "init" {
         init_repository(&config);
-    } else if args_first == OsString::from("push") {
+    } else if args_first == "push" {
         push_to_all_remotes(&config);
-    } else if args_first == OsString::from("acp") {
+    } else if args_first == "acp" {
         add_commit_push_to_all_remotes(&config);
-    } else if args_first == OsString::from("pacp") {
+    } else if args_first == "pacp" {
         publish_package();
         add_commit_auto_push(&config);
-    } else if args_first == OsString::from("help") {
+    } else if args_first == "help" {
         git::help();
-    } else if args_first == OsString::from("-v")
-        || args_first == OsString::from("version")
-        || args_first == OsString::from("--version")
+    } else if args_first == "-v"
+        || args_first == "version"
+        || args_first == "--version"
     {
         git::version();
     } else {
@@ -107,14 +108,12 @@ fn publish_package() {
             }
             Ok(exit_status) => {
                 eprintln!(
-                    "Attempt {} failed with status: {}. Retrying in {} seconds...",
-                    attempt, exit_status, RETRY_DELAY_SECS
+                    "Attempt {attempt} failed with status: {exit_status}. Retrying in {RETRY_DELAY_SECS} seconds..."
                 );
             }
             Err(e) => {
                 eprintln!(
-                    "Attempt {} failed with error: {}. Retrying in {} seconds...",
-                    attempt, e, RETRY_DELAY_SECS
+                    "Attempt {attempt} failed with error: {e}. Retrying in {RETRY_DELAY_SECS} seconds..."
                 );
             }
         }
@@ -124,7 +123,7 @@ fn publish_package() {
         }
     }
 
-    panic!("Failed to publish package after {} attempts.", MAX_RETRIES);
+    panic!("Failed to publish package after {MAX_RETRIES} attempts.");
 }
 
 /// Initializes a git repository with configuration.

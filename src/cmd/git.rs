@@ -20,7 +20,7 @@ pub fn config_global_add_safe_directory(path: &str) {
             "--global",
             "--add",
             "safe.directory",
-            &format!("'{}'", path),
+            &format!("'{path}'"),
         ])
         .status()
         .expect("Failed to execute git config --global --add safe.directory './'");
@@ -66,7 +66,7 @@ pub fn commit(msg: &str) {
     Command::new("git")
         .args(["commit", "-m", msg])
         .status()
-        .expect(&format!("Failed to commit -m {}", msg));
+        .unwrap_or_else(|_| panic!("Failed to commit -m {msg}"));
 }
 
 /// Pushes changes to a git remote.
@@ -85,8 +85,7 @@ pub fn push(remote: &str) {
 pub fn help() {
     let get_package_name: &str = get_package_name();
     println!(
-        "{} extension usage: {} acp\n",
-        get_package_name, get_package_name
+        "{get_package_name} extension usage: {get_package_name} acp\n"
     );
     Command::new("git")
         .arg("help")
