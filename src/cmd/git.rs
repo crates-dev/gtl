@@ -84,9 +84,7 @@ pub fn push(remote: &str) {
 /// Displays git help information.
 pub fn help() {
     let get_package_name: &str = get_package_name();
-    println!(
-        "{get_package_name} extension usage: {get_package_name} acp\n"
-    );
+    println!("{get_package_name} extension usage: {get_package_name} acp\n");
     Command::new("git")
         .arg("help")
         .status()

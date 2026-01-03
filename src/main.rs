@@ -81,10 +81,7 @@ fn main() {
         add_commit_auto_push(&config);
     } else if args_first == "help" {
         git::help();
-    } else if args_first == "-v"
-        || args_first == "version"
-        || args_first == "--version"
-    {
+    } else if args_first == "-v" || args_first == "version" || args_first == "--version" {
         git::version();
     } else {
         git::other(&args);
