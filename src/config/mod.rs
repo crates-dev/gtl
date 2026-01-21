@@ -1,3 +1,6 @@
-pub(crate) mod r#const;
-pub(crate) mod r#func;
-pub(crate) mod r#type;
+mod r#const;
+mod r#fn;
+mod r#struct;
+mod r#type;
+
+pub(crate) use {r#const::*, r#fn::*, r#struct::*, r#type::*};

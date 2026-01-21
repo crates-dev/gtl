@@ -9,7 +9,7 @@ use crate::*;
 /// # Returns
 ///
 /// - `Config` - The parsed configuration.
-pub fn read_config<P: AsRef<Path>>(path: P) -> Config {
+pub(crate) fn read_config<P: AsRef<Path>>(path: P) -> Config {
     let path_ref: &Path = path.as_ref();
     if !path_ref.exists() {
         if let Some(parent) = path_ref.parent() {
@@ -22,4 +22,22 @@ pub fn read_config<P: AsRef<Path>>(path: P) -> Config {
     }
     let data: String = fs::read_to_string(path).expect("Unable to read config file");
     serde_json::from_str(&data).expect("Unable to parse config file")
+}
+
+/// Gets the package name.
+///
+/// # Returns
+///
+/// - `&'static str` - The package name.
+pub(crate) fn get_package_name() -> &'static str {
+    PACKAGE_NAME
+}
+
+/// Gets the package version.
+///
+/// # Returns
+///
+/// - `&'static str` - The package version.
+pub(crate) fn get_package_version() -> &'static str {
+    PACKAGE_VERSION
 }
