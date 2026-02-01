@@ -1,7 +1,7 @@
 use crate::*;
 
 /// Remote repository configuration.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Deserialize, Serialize)]
 pub(crate) struct Remote {
     /// Remote name.
     pub(crate) name: String,
