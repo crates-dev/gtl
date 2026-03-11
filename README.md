@@ -2,8 +2,6 @@
 
 ## gtl
 
-[English](README.md) | [简体中文](README.ZH-CN.md)
-
 [![](https://img.shields.io/crates/v/gtl.svg)](https://crates.io/crates/gtl)
 [![](https://img.shields.io/crates/d/gtl.svg)](https://img.shields.io/crates/d/gtl.svg)
 [![](https://img.shields.io/crates/l/gtl.svg)](./license)
@@ -83,26 +81,6 @@ gtl --version
 ```bash
 gtl help
 ```
-
-## Appreciate
-
-**If you find `gtl` helpful, feel free to donate.**
-
-### WeChat Pay
-
-<img src="https://docs.ltpp.vip/img/wechatpay.png" width="200">
-
-### Alipay
-
-<img src="https://docs.ltpp.vip/img/alipay.png" width="200">
-
-### Virtual Currency Pay
-
-| Virtual Currency | Virtual Currency Address                   |
-| ---------------- | ------------------------------------------ |
-| BTC              | 3QndxCJTf3mEniTgyRRQ1jcNTJajm9qSCy         |
-| ETH              | 0x8EB3794f67897ED397584d3a1248a79e0B8e97A6 |
-| BSC              | 0x8EB3794f67897ED397584d3a1248a79e0B8e97A6 |
 
 ## License
 
